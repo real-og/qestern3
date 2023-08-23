@@ -35,6 +35,10 @@ yes_no_kb = ReplyKeyboardMarkup([[texts.yes_btn, texts.no_btn]],
                                      resize_keyboard=True,
                                      one_time_keyboard=True)
 
+finish_task_kb = ReplyKeyboardMarkup([[texts.finish_task_btn]],
+                                     resize_keyboard=True,
+                                     one_time_keyboard=True)
+
 
 
 # hint_kb = ReplyKeyboardMarkup([[texts.get_hint]],

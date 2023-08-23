@@ -8,7 +8,7 @@ import aiotable
 
 
 @dp.message_handler(state=State.start_confirmation)
-async def send_welcome(message: types.Message, state: FSMContext):
+async def get_to_menu(message: types.Message, state: FSMContext):
     with open('images/map.jpg', 'rb') as photo:
         await message.answer_photo(photo, caption=texts.map_instruction)
     await message.answer(texts.route_instruction)

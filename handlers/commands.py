@@ -15,9 +15,8 @@ async def send_welcome(message: types.Message, state: FSMContext):
             await message.answer(texts.welcome)
             await message.answer(texts.enter_team_name)
             await State.entering_name.set()
-            print(CODES)
-            print(CODES.index(code))
             await state.update_data(team_number=CODES.index(code) + 1)
+            await state.update_data(score=0)
         else:
             print('wrong code')
     else:
