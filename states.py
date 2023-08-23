@@ -5,3 +5,4 @@ class State(StatesGroup):
     entering_name = State()
     confirmation_name = State()
     menu = State()
+    start_confirmation = State()
