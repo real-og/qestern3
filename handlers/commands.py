@@ -19,6 +19,7 @@ async def send_welcome(message: types.Message, state: FSMContext):
             await state.update_data(team_number=CODES.index(code) + 1)
             if data.get('score') is None:
                 await state.update_data(score=0)
+                await state.update_data(team_name='_')
                 await state.update_data(completed_tasks=[])
  
             await aiotable.append_user(message.from_user.id, message.from_user.username, code)

@@ -36,6 +36,7 @@ async def send_welcome(message: types.Message, state: FSMContext):
         if texts.task5_ans.get(answer) not in task_5_answered:
             with open('images/1.jpg', 'rb') as photo:
                 await message.answer_photo(photo, reply_markup=kb.finish_task_kb, caption=texts.correct_ans_header)
+            await aiotable.implement_score(message.from_id, 5, 1)
             task_5_answered.append(texts.task5_ans.get(answer))
             await state.update_data(task_5_answered=task_5_answered)
             score = data.get('score')

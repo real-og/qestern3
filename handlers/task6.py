@@ -30,6 +30,7 @@ async def send_welcome(message: types.Message, state: FSMContext):
     if message.text == texts.task_completed_btn:
         with open('images/5.jpg', 'rb') as photo:
             await message.answer_photo(photo)
+        await aiotable.implement_score(message.from_id, 6, 5)
         data = await state.get_data()
         score = data.get('score')
         await state.update_data(score=int(score) + 5)

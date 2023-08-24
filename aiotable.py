@@ -29,37 +29,52 @@ async def append_user(id: str, username: str, code):
             await sheet.update_cell(cell.row, 5, '1')
             await sheet.update_cell(cell.row, 3, code)
 
-async def change_level(id, level):
-    sheet = await get_sheet()
-    cell = await sheet.find(id)
-    if cell is None:
-        return
-    row_number = cell.row
-    await sheet.update_cell(row_number, 4, level)
+async def set_team_name(id: str, name: str):
+        sheet = await get_sheet()
+        cell = await sheet.find(str(id))
+        if cell is None:
+            print(f'not found {id}')
+            return
+        else:
+            await sheet.update_cell(cell.row, 4, name)
+            
 
-async def change_name(id, name):
+async def implement_score(id, level, amount):
     sheet = await get_sheet()
-    cell = await sheet.find(id)
+    cell = await sheet.find(str(id))
     if cell is None:
         return
     row_number = cell.row
-    await sheet.update_cell(row_number, 5, name)
+    cell = await sheet.cell(row_number, level + 5)
+    if cell.value:
+        await sheet.update_cell(row_number, level + 5, amount + int(cell.value))
+    else:
+        await sheet.update_cell(row_number, level + 5, amount)
+         
 
-async def change_email(id, email):
-    sheet = await get_sheet()
-    cell = await sheet.find(id)
-    if cell is None:
-        return
-    row_number = cell.row
-    await sheet.update_cell(row_number, 6, email)
+# async def change_name(id, name):
+#     sheet = await get_sheet()
+#     cell = await sheet.find(id)
+#     if cell is None:
+#         return
+#     row_number = cell.row
+#     await sheet.update_cell(row_number, 5, name)
 
-async def set_lottary_number(id, number):
-    sheet = await get_sheet()
-    cell = await sheet.find(id)
-    if cell is None:
-        return
-    row_number = cell.row
-    await sheet.update_cell(row_number, 7, number)
+# async def change_email(id, email):
+#     sheet = await get_sheet()
+#     cell = await sheet.find(id)
+#     if cell is None:
+#         return
+#     row_number = cell.row
+#     await sheet.update_cell(row_number, 6, email)
+
+# async def set_lottary_number(id, number):
+#     sheet = await get_sheet()
+#     cell = await sheet.find(id)
+#     if cell is None:
+#         return
+#     row_number = cell.row
+#     await sheet.update_cell(row_number, 7, number)
 
 
 
