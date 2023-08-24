@@ -7,7 +7,7 @@ from states import State
 import aiotable
 from handlers.menu import get_to_menu
 
-
+#Коктейли
 @dp.callback_query_handler(lambda c: c.data == texts.places_btns[0], state=State.menu)  
 async def process_button1(callback: types.CallbackQuery, state: FSMContext):
     data = await state.get_data()
