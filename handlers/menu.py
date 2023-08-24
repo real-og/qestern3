@@ -13,6 +13,7 @@ async def get_to_menu(message: types.Message, state: FSMContext):
         await message.answer_photo(photo, caption=texts.map_instruction)
     await message.answer(texts.route_instruction)
     data = await state.get_data()
+    print(data.get('score'))
     team_number = data.get('team_number')
     await message.answer(texts.route_header, reply_markup=kb.generate_locations_kb(team_number))
     await State.menu.set()

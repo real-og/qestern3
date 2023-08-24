@@ -37,14 +37,22 @@ async def send_welcome(message: types.Message, state: FSMContext):
 
 @dp.message_handler(state=State.helmet_decision)
 async def send_welcome(message: types.Message, state: FSMContext):
+    data = await state.get_data()
     if message.text == texts.take_helmet_btn:
-        print('take')
+        with open('images/5.jpg', 'rb') as photo:
+            await message.answer_photo(photo)
+        score = data.get('score')
+        await state.update_data(score=int(score) + 5)
+        await get_to_menu(message, state)
     elif message.text == texts.give_helmet_btn:
         print('give')
+        with open('images/5.jpg', 'rb') as photo:
+            await message.answer_photo(photo)
+        score = data.get('score')
+        await state.update_data(score=int(score) + 5)
+        await get_to_menu(message, state)
     else:
         await message.answer(texts.use_kb, reply_markup=kb.helmet_kb)
-    with open('images/5.jpg', 'rb') as photo:
-        await message.answer_photo(photo)
-    await get_to_menu(message, state)
+
     
 

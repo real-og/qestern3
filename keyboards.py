@@ -45,4 +45,9 @@ helmet_kb = ReplyKeyboardMarkup([[texts.give_helmet_btn, texts.take_helmet_btn]]
                                   one_time_keyboard=True)
 
 
+task_completed_kb = ReplyKeyboardMarkup([[texts.task_completed_btn]],
+                                     resize_keyboard=True,
+                                     one_time_keyboard=True)
+
+
 
