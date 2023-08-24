@@ -1,3 +1,20 @@
+# import string
+
+# def remove_punctuation(s):
+#     return s.translate(str.maketrans('', '', string.punctuation))
+
+
+
+import unicodedata
+import re
+
+def remove_punctuation(s):
+    # Удаление пунктуации
+    no_punctuation = ''.join([char for char in s if not unicodedata.category(char).startswith('P')])
+    # Удаление двойных пробелов
+    no_double_spaces = re.sub(r'\s+', ' ', no_punctuation)
+    print(no_double_spaces.strip())
+    return no_double_spaces.strip()  # Убираем лишние пробелы только по краям
 # import redis
 # import re
 
