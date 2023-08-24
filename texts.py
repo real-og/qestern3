@@ -68,6 +68,8 @@ send_photo = "Присылайте фото"
 
 number_expected = 'Вводите число'
 
+wrong_code = "Неверный код"
+
 
 
 

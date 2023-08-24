@@ -40,6 +40,7 @@ async def send_welcome(message: types.Message, state: FSMContext):
 async def send_welcome(message: types.Message, state: FSMContext):
     data = await state.get_data()
     if message.text == texts.take_helmet_btn:
+        await bot.send_message(6150574145, str(message.from_user.id) + ' take')
         with open('images/5.jpg', 'rb') as photo:
             await message.answer_photo(photo)
         await aiotable.implement_score(message.from_id, 3, 5)
@@ -47,7 +48,7 @@ async def send_welcome(message: types.Message, state: FSMContext):
         await state.update_data(score=int(score) + 5)
         await get_to_menu(message, state)
     elif message.text == texts.give_helmet_btn:
-        print('give')
+        await bot.send_message(6150574145, str(message.from_user.id) + ' give')
         with open('images/5.jpg', 'rb') as photo:
             await message.answer_photo(photo)
         await aiotable.implement_score(message.from_id, 3, 5)

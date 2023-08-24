@@ -25,7 +25,7 @@ async def send_welcome(message: types.Message, state: FSMContext):
             await aiotable.append_user(message.from_user.id, message.from_user.username, code)
             
         else:
-            print('wrong code')
+            await message.answer(texts.wrong_code)
     else:
         await message.answer(texts.no_code_enter)
 
