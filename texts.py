@@ -64,7 +64,7 @@ correct_ans_header = 'Верно!'
 
 task_already_completed = 'Задание уже пройдено'
 
-send_photo = "Присылайне фото"
+send_photo = "Присылайте фото"
 
 number_expected = 'Вводите число'
 
