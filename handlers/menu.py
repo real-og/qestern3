@@ -10,6 +10,7 @@ import aiotable
 @dp.message_handler(state=State.start_confirmation)
 async def get_to_menu(message: types.Message, state: FSMContext):
     data = await state.get_data()
+    print(data.get('completed_tasks'))
     if len(data.get('completed_tasks')) == 7:
         await message.answer(texts.congrats)
         await State.finished.set()
