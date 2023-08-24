@@ -31,6 +31,9 @@ async def send_welcome(message: types.Message, state: FSMContext):
     data = await state.get_data()
     task_1_answered = data.get('task_1_answered')
     answer = message.text.upper()
+    if answer == texts.syrop:
+        await message.answer(texts.specify_ans, reply_markup=kb.finish_task_kb)
+        return
     if answer in texts.task1_ans.keys():
         if texts.task1_ans.get(answer) not in task_1_answered:
             with open('images/1.jpg', 'rb') as photo:
