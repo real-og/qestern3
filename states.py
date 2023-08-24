@@ -16,3 +16,4 @@ class State(StatesGroup):
     task_4_points = State()
     task_5 = State()
     task_5_exit = State()
+    task_6_inprogress = State()
