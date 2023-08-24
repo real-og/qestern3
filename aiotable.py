@@ -52,29 +52,14 @@ async def implement_score(id, level, amount):
         await sheet.update_cell(row_number, level + 5, amount)
          
 
-# async def change_name(id, name):
-#     sheet = await get_sheet()
-#     cell = await sheet.find(id)
-#     if cell is None:
-#         return
-#     row_number = cell.row
-#     await sheet.update_cell(row_number, 5, name)
-
-# async def change_email(id, email):
-#     sheet = await get_sheet()
-#     cell = await sheet.find(id)
-#     if cell is None:
-#         return
-#     row_number = cell.row
-#     await sheet.update_cell(row_number, 6, email)
-
-# async def set_lottary_number(id, number):
-#     sheet = await get_sheet()
-#     cell = await sheet.find(id)
-#     if cell is None:
-#         return
-#     row_number = cell.row
-#     await sheet.update_cell(row_number, 7, number)
-
-
-
+async def set_current_level(id, level):
+    print(id)
+    sheet = await get_sheet()
+    cell = await sheet.find(str(id))
+    if cell is None:
+        return
+    row_number = cell.row
+    await sheet.update_cell(row_number, 5, level)
+    if int(level) in [1, 2, 5]:
+         await sheet.update_cell(row_number, 5 + level, 0)
+         

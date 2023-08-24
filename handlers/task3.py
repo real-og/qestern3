@@ -16,6 +16,7 @@ async def process_button1(callback: types.CallbackQuery, state: FSMContext):
         await callback.message.answer(texts.task_already_completed)
         await bot.answer_callback_query(callback.id)
         return
+    await aiotable.set_current_level(callback.from_user.id, 3)
     await callback.message.answer(texts.task3)
     completed_tasks.append(callback.data)
     await state.update_data(completed_tasks=completed_tasks)
