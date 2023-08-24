@@ -1,4 +1,4 @@
-from loader import dp, CODES
+from loader import dp, CODES, bot
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 import texts
@@ -14,8 +14,13 @@ async def get_to_menu(message: types.Message, state: FSMContext):
         await message.answer(texts.congrats)
         await State.finished.set()
         return
-    with open('images/map.jpg', 'rb') as photo:
-        await message.answer_photo(photo, caption=texts.map_instruction)
+    
+    chat = await bot.get_chat(message.chat.id)
+    if not chat.pinned_message:           
+        with open('images/map.jpg', 'rb') as photo:
+            mes = await message.answer_photo(photo, caption=texts.map_instruction)
+        await mes.pin(disable_notification=True)
+        
     await message.answer(texts.route_instruction)
     team_number = data.get('team_number')
     await message.answer(texts.route_header, reply_markup=kb.generate_locations_kb(team_number))
