@@ -20,13 +20,14 @@ async def get_sheet(agcm=agcm):
     zero_ws = await ss.get_worksheet(0)
     return zero_ws
 
-async def append_user(id: str, username: str, full_name: str = 'Без имени'):
+async def append_user(id: str, username: str, code):
         sheet = await get_sheet()
-        cell = await sheet.find(id)
+        cell = await sheet.find(str(id))
         if cell is None:
-            await sheet.append_row([id, username, full_name, '1'])
+            await sheet.append_row([id, username, code])
         else:
-            await sheet.update_cell(cell.row, 4, '1')
+            await sheet.update_cell(cell.row, 5, '1')
+            await sheet.update_cell(cell.row, 3, code)
 
 async def change_level(id, level):
     sheet = await get_sheet()
