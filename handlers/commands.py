@@ -9,6 +9,7 @@ import aiotable
 
 @dp.message_handler(commands=['start'], state="*")
 async def send_welcome(message: types.Message, state: FSMContext):
+    data = await state.get_data()
     if len(message.text.split()) == 2:
         code = message.text.split()[1]
         if code in CODES:
@@ -16,7 +17,10 @@ async def send_welcome(message: types.Message, state: FSMContext):
             await message.answer(texts.enter_team_name)
             await State.entering_name.set()
             await state.update_data(team_number=CODES.index(code) + 1)
-            await state.update_data(score=0)
+            if data.get('score') is None:
+                await state.update_data(score=0)
+                await state.update_data(completed_tasks=[])
+            
         else:
             print('wrong code')
     else:

@@ -1,4 +1,4 @@
-from loader import dp, CODES
+from loader import dp, CODES, bot
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 import texts
@@ -10,11 +10,19 @@ from handlers.menu import get_to_menu
 
 @dp.callback_query_handler(lambda c: c.data == texts.places_btns[0], state=State.menu)  
 async def process_button1(callback: types.CallbackQuery, state: FSMContext):
-    await callback.message.answer(texts.task1)
     data = await state.get_data()
+    completed_tasks = data.get('completed_tasks')
+    if callback.data in completed_tasks:
+        await callback.message.answer(texts.task_already_completed)
+        await bot.answer_callback_query(callback.id)
+        return
+    await callback.message.answer(texts.task1)
+    completed_tasks.append(callback.data)
+    await state.update_data(completed_tasks=completed_tasks)
     if data.get('task_1_answered') is None:
         await state.update_data(task_1_answered = [])
     await State.task_1.set()
+    await bot.answer_callback_query(callback.id)
 
 @dp.message_handler(state=State.task_1)
 async def send_welcome(message: types.Message, state: FSMContext):

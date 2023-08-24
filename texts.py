@@ -38,6 +38,8 @@ use_kb = 'Используйте клавиатуру.'
 
 correct_ans_header = 'Верно!'
 
+task_already_completed = 'Задание уже пройдено'
+
 
 
 
