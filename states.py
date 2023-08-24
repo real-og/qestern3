@@ -10,3 +10,5 @@ class State(StatesGroup):
     task_1_exit = State()
     task_2 = State()
     task_2_exit = State()
+    task_3_to_start = State()
+    helmet_decision = State()
