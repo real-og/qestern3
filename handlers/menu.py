@@ -24,6 +24,6 @@ async def get_to_menu(message: types.Message, state: FSMContext):
     await State.menu.set()
 
 @dp.message_handler(state=State.finished)
-async def get_to_menu(message: types.Message, state: FSMContext):
+async def ge(message: types.Message, state: FSMContext):
     await message.answer(texts.quest_finished)
 
