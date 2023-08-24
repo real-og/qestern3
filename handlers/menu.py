@@ -11,6 +11,8 @@ import aiotable
 async def get_to_menu(message: types.Message, state: FSMContext):
     data = await state.get_data()
     if len(data.get('completed_tasks')) == 7:
+        score = data.get('score')
+        await message.answer(texts.generate_final_score(score))
         await message.answer(texts.congrats)
         await State.finished.set()
         return

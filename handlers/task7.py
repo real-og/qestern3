@@ -38,7 +38,7 @@ async def send_welcome(message: types.Message, state: FSMContext):
 @dp.message_handler(state=State.task_7_points)
 async def send_welcome(message: types.Message, state: FSMContext):
     if message.text in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']:
-        with open(f'images/{message.text}.jpg', 'rb') as photo:
+        with open(f'images/{message.text}1.jpg', 'rb') as photo:
             await message.answer_photo(photo)
         await aiotable.implement_score(message.from_id, 7, int(message.text))
         data = await state.get_data()
