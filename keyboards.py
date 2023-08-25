@@ -23,7 +23,7 @@ def generate_locations_kb(team_number, completed_tasks):
     elif team_number == '8':
         places_order = [1, 2, 3, 4, 5, 6, 7]
     elif team_number == '9':
-        places_order = [2, 3, 4, 5, 6, 7, 8]
+        places_order = [2, 3, 4, 5, 6, 7, 1]
     places_names = [texts.places_btns[index - 1] for index in places_order]
     kb = InlineKeyboardMarkup(row_width=1)
     for place_name in places_names:
