@@ -53,7 +53,6 @@ async def implement_score(id, level, amount):
          
 
 async def set_current_level(id, level):
-    print(id)
     sheet = await get_sheet()
     cell = await sheet.find(str(id))
     if cell is None:

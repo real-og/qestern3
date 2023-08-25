@@ -10,7 +10,8 @@ import aiotable
 @dp.message_handler(state=State.start_confirmation)
 async def get_to_menu(message: types.Message, state: FSMContext):
     data = await state.get_data()
-    if len(data.get('completed_tasks')) == 7:
+    completed_tasks = data.get('completed_tasks')
+    if len(completed_tasks) == 7:
         score = data.get('score')
         await message.answer(texts.generate_final_score(score))
         await message.answer(texts.congrats)
@@ -25,7 +26,7 @@ async def get_to_menu(message: types.Message, state: FSMContext):
         
     await message.answer(texts.route_instruction)
     team_number = data.get('team_number')
-    await message.answer(texts.route_header, reply_markup=kb.generate_locations_kb(team_number))
+    await message.answer(texts.route_header, reply_markup=kb.generate_locations_kb(team_number, completed_tasks))
     await State.menu.set()
 
 @dp.message_handler(state=State.finished)

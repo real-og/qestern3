@@ -4,7 +4,7 @@ from aiogram.types import ReplyKeyboardRemove, \
 import texts
 
 
-def generate_locations_kb(team_number):
+def generate_locations_kb(team_number, completed_tasks):
     team_number = str(team_number)
     if team_number == '1':
         places_order = [1, 2, 3, 4, 5, 6, 7]
@@ -27,7 +27,10 @@ def generate_locations_kb(team_number):
     places_names = [texts.places_btns[index - 1] for index in places_order]
     kb = InlineKeyboardMarkup(row_width=1)
     for place_name in places_names:
-        kb.add(InlineKeyboardButton(text=place_name, callback_data=place_name))
+        btn_text = place_name
+        if place_name in completed_tasks:
+            btn_text += '✔️'
+        kb.add(InlineKeyboardButton(text=btn_text, callback_data=place_name))
     return kb
         
 
