@@ -13,8 +13,10 @@ async def get_to_menu(message: types.Message, state: FSMContext):
     completed_tasks = data.get('completed_tasks')
     if len(completed_tasks) == 7:
         score = data.get('score')
+        await message.answer(texts.congrats1)
         await message.answer(texts.generate_final_score(score))
-        await message.answer(texts.congrats)
+        await message.answer(texts.congrats2)
+        await message.answer(texts.congrats3)
         await State.finished.set()
         return
     
