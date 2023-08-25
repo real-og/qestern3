@@ -29,6 +29,14 @@ async def process_button1(callback: types.CallbackQuery, state: FSMContext):
 @dp.message_handler(state=State.task_6_inprogress)
 async def send_welcome(message: types.Message, state: FSMContext):
     if message.text == texts.task_completed_btn:
+        await message.answer(texts.task6_2)
+        await State.task_6_keyword_entering.set()
+    else:
+        await message.answer(texts.use_kb, reply_markup=kb.task_completed_kb)
+
+@dp.message_handler(state=State.task_6_keyword_entering)
+async def send_welcome(message: types.Message, state: FSMContext):
+    if message.text.upper() == texts.task6_ans:
         with open('images/51.jpg', 'rb') as photo:
             await message.answer_photo(photo)
         await aiotable.implement_score(message.from_id, 6, 5)
@@ -37,6 +45,6 @@ async def send_welcome(message: types.Message, state: FSMContext):
         await state.update_data(score=int(score) + 5)
         await get_to_menu(message, state)
     else:
-        await message.answer(texts.use_kb, reply_markup=kb.task_completed_kb)
+        await message.answer(texts.wrong_answer)
         
 
